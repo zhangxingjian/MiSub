@@ -2,18 +2,16 @@ import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import tailwindcss from '@tailwindcss/vite'
 
+import { cloudflare } from "@cloudflare/vite-plugin";
+
 export default defineConfig({
-  plugins: [
-    vue(),
-    tailwindcss(),
-    {
-      name: 'html-transform-rocket-loader',
-      transformIndexHtml(html) {
-        // 自动为所有 module script 添加 data-cfasync="false" 以防止 Cloudflare Rocket Loader 破坏加载
-        return html.replace(/<script type="module"/g, '<script type="module" data-cfasync="false"');
-      }
+  plugins: [vue(), tailwindcss(), {
+    name: 'html-transform-rocket-loader',
+    transformIndexHtml(html) {
+      // 自动为所有 module script 添加 data-cfasync="false" 以防止 Cloudflare Rocket Loader 破坏加载
+      return html.replace(/<script type="module"/g, '<script type="module" data-cfasync="false"');
     }
-  ],
+  }, cloudflare()],
   // 性能优化构建配置
   build: {
     // 启用CSS代码分割

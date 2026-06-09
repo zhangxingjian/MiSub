@@ -7,10 +7,11 @@
     "dev": "vite",
     "dev:server": "npx wrangler pages dev public --port 8787",
     "build": "vite build",
-    "preview": "vite preview",
+    "preview": "npm run build && wrangler dev",
     "test": "vitest --passWithNoTests",
     "test:run": "vitest run --passWithNoTests",
-    "test:coverage": "vitest run --coverage --passWithNoTests"
+    "test:coverage": "vitest run --coverage --passWithNoTests",
+    "deploy": "npm run build && wrangler deploy"
   },
   "dependencies": {
     "dompurify": "^3.2.6",
@@ -22,6 +23,7 @@
     "vuedraggable": "^4.1.0"
   },
   "devDependencies": {
+    "@cloudflare/vite-plugin": "^1.40.1",
     "@tailwindcss/vite": "^4.1.18",
     "@vitejs/plugin-vue": "^6.0.1",
     "@vue/test-utils": "^2.4.6",
@@ -32,6 +34,6 @@
     "terser": "^5.48.0",
     "vite": "^7.1.2",
     "vitest": "^4.0.16",
-    "wrangler": "^4.56.0"
+    "wrangler": "^4.99.0"
   }
 }
